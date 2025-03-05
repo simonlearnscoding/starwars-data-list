@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "test": "vitest"
+    "test": "vitest",
+    "e2e": "cypress open"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.7",
