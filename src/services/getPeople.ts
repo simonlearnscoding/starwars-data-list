@@ -1,5 +1,5 @@
 import { Person, PeopleResponse, FetchPeopleResult, FetchPeopleOptions } from '@/types';
-import axios from 'redaxios';
+import axios from 'axios';
 
 /***
 This function fetches people from the Star Wars API using Axios.

@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
-import { RedaxiosError } from '@/types';
-import axios from 'redaxios';
+import axios, { AxiosError } from 'axios';
 
 interface FetchState<T> {
   data: T | null;
   isLoading: boolean;
   isError: boolean;
-  error: RedaxiosError | null;
+  error: AxiosError | null;
   refetch: () => void;
 }
 
@@ -22,7 +21,7 @@ function useFetch<T = unknown>(url: string): FetchState<T> {
   const [data, setData] = useState<T | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [error, setError] = useState<RedaxiosError | null>(null);
+  const [error, setError] = useState<AxiosError | null>(null);
 
   const fetchData = async () => {
     setIsLoading(true);
@@ -34,7 +33,7 @@ function useFetch<T = unknown>(url: string): FetchState<T> {
       setData(response.data);
     } catch (err) {
       setIsError(true);
-      setError(err as RedaxiosError);
+      setError(err as AxiosError);
     } finally {
       setIsLoading(false);
     }
