@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Person } from '@/types';
+import HighlightText from './HighlightText';
 
 interface TableCellProps {
   children: React.ReactNode;
@@ -39,9 +40,11 @@ export const replacePlanetUrl = (url: string): string => {
   return url.startsWith(swapiBase) ? url.replace(swapiBase, customBase) : url;
 };
 
-const TableRow: React.FC<TableRowProps> = ({ person }) => (
+const TableRow: React.FC<TableRowProps> = ({ person, highlight }) => (
   <tr className="hover:bg-gray-50">
-    <TableCell> {person.name} </TableCell>
+    <TableCell>
+      <HighlightText text={person.name} highlight={highlight || ''} />
+    </TableCell>
     <TableCell>{person.height}</TableCell>
     <TableCell>{person.mass}</TableCell>
     <TableCell>{new Date(person.created).toLocaleDateString()}</TableCell>
@@ -70,10 +73,12 @@ const SkeletonRow = () => (
 
 interface PeopleTableProps {
   data: Person[];
+  loadMoreRef: React.LegacyRef<HTMLTableRowElement>;
   isLoading: boolean;
+  highlight?: string;
 }
 
-const DataTableUI: React.FC<PeopleTableProps> = ({ data, isLoading }) => {
+const DataTableUI: React.FC<PeopleTableProps> = ({ data, loadMoreRef, isLoading, highlight }) => {
   return (
     <div className="shadow-md">
       <div className="overflow-x-auto h-[680px] overflow-y-scroll">
@@ -106,7 +111,7 @@ const DataTableUI: React.FC<PeopleTableProps> = ({ data, isLoading }) => {
 
             {/* Actual Data */}
             {data.map((person) => (
-              <TableRow key={person.url} person={person} />
+              <TableRow key={person.url} person={person} highlight={highlight} />
             ))}
 
             {/* Infinite Scroll Loading Indicator */}
@@ -119,6 +124,11 @@ const DataTableUI: React.FC<PeopleTableProps> = ({ data, isLoading }) => {
                 </td>
               </tr>
             )}
+
+            {/* Load More Trigger Element */}
+            <tr ref={loadMoreRef}>
+              <td colSpan={columns.length}></td>
+            </tr>
           </tbody>
         </table>
       </div>
