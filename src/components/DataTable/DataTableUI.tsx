@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, type Location } from 'react-router-dom';
 import { Person } from '@/types';
 import HighlightText from './HighlightText';
 
@@ -32,6 +32,7 @@ const columns = [
 interface TableRowProps {
   person: Person;
   highlight?: string;
+  location: Location;
 }
 
 export const replacePlanetUrl = (url: string): string => {
@@ -40,27 +41,32 @@ export const replacePlanetUrl = (url: string): string => {
   return url.startsWith(swapiBase) ? url.replace(swapiBase, customBase) : url;
 };
 
-const TableRow: React.FC<TableRowProps> = ({ person, highlight }) => (
-  <tr className="hover:bg-gray-50">
-    <TableCell>
-      <HighlightText text={person.name} highlight={highlight || ''} />
-    </TableCell>
-    <TableCell>{person.height}</TableCell>
-    <TableCell>{person.mass}</TableCell>
-    <TableCell>{new Date(person.created).toLocaleDateString()}</TableCell>
-    <TableCell>{new Date(person.edited).toLocaleDateString()}</TableCell>
-    <TableCell>
-      <Link
-        to={'/planets/' + person.homeworld.split('/').filter(Boolean).pop()}
-        className="text-blue-600 link hover:text-blue-800"
-        rel="noopener noreferrer"
-      >
-        View Planet
-      </Link>
-    </TableCell>
-  </tr>
-);
-
+const TableRow: React.FC<TableRowProps> = ({ person, highlight, location }) => {
+  const planetId = person.homeworld.split('/').filter(Boolean).pop();
+  return (
+    <tr className="hover:bg-gray-50">
+      <TableCell>
+        <HighlightText text={person.name} highlight={highlight || ''} />
+      </TableCell>
+      <TableCell>{person.height}</TableCell>
+      <TableCell>{person.mass}</TableCell>
+      <TableCell>{new Date(person.created).toLocaleDateString()}</TableCell>
+      <TableCell>{new Date(person.edited).toLocaleDateString()}</TableCell>
+      <TableCell>
+        <Link
+          to={{
+            pathname: `/planets/${planetId}`,
+            search: location.search, // preserves the current query parameters
+          }}
+          className="text-blue-600 link hover:text-blue-800"
+          rel="noopener noreferrer"
+        >
+          View Planet
+        </Link>
+      </TableCell>
+    </tr>
+  );
+};
 const SkeletonRow = () => (
   <tr className="animate-pulse bg-gray-100">
     {columns.map((col) => (
@@ -79,6 +85,7 @@ interface PeopleTableProps {
 }
 
 const DataTableUI: React.FC<PeopleTableProps> = ({ data, loadMoreRef, isLoading, highlight }) => {
+  const location = useLocation();
   return (
     <div className="shadow-md">
       <div className="overflow-x-auto h-[680px] overflow-y-scroll">
@@ -111,7 +118,12 @@ const DataTableUI: React.FC<PeopleTableProps> = ({ data, loadMoreRef, isLoading,
 
             {/* Actual Data */}
             {data.map((person) => (
-              <TableRow key={person.url} person={person} highlight={highlight} />
+              <TableRow
+                location={location}
+                key={person.url}
+                person={person}
+                highlight={highlight}
+              />
             ))}
 
             {/* Infinite Scroll Loading Indicator */}
