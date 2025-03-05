@@ -34,7 +34,7 @@ This application is designed to allow users to view a grid-table of Star Wars ch
 - **Framework:** React.js (with TypeScript)
 - **State Management:** Redux Toolkit & React Redux
 - **Routing:** React Router 
-- **HTTP Client:** Axios
+- **HTTP Client:** Redaxios
 - **Styling:** Tailwind CSS
 - **Icons:** Phosphor Icons
 - **Build Tool:** Vite

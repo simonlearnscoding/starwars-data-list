@@ -5,6 +5,13 @@ export type Planet = {
   population: string;
 };
 
+export interface RedaxiosError extends Error {
+  response?: {
+    status: number;
+    data: any;
+  };
+  request?: any;
+}
 export type PlanetError = {
   message: string;
   statusCode?: number;

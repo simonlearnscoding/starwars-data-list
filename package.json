@@ -2,6 +2,7 @@
   "name": "react-shadcn-starter",
   "private": true,
   "version": "0.1",
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -13,13 +14,13 @@
   "dependencies": {
     "@phosphor-icons/react": "^2.1.7",
     "@reduxjs/toolkit": "^2.6.0",
-    "axios": "^1.8.1",
     "cypress": "^14.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.2.0",
     "react-wrap-balancer": "^1.1.0",
+    "redaxios": "^0.5.1",
     "redux": "^5.0.1",
     "styled-components": "^6.1.15",
     "tailwind-merge": "^3.0.1",
