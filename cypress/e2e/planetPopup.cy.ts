@@ -1,3 +1,4 @@
+export {};
 describe('Planet Popup', () => {
   beforeEach(() => {
     cy.viewport(1920, 1080);

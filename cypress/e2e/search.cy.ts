@@ -1,3 +1,4 @@
+export {};
 describe('Search Feature', () => {
   beforeEach(() => {
     // here it is important to have reliable data so the test won't fail

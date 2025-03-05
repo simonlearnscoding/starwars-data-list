@@ -1,3 +1,4 @@
+export {};
 describe('People Table with Real API', () => {
   beforeEach(() => {
     // Set viewport size

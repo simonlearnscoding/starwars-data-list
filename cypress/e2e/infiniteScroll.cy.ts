@@ -1,3 +1,4 @@
+export {};
 describe('Infinite Scroll functionality', () => {
   beforeEach(() => {
     // Set viewport size
