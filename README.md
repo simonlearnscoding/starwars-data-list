@@ -2,18 +2,6 @@
 
 A one-page Star Wars explorer application built with React, TypeScript, Redux, and Vite. This project displays a list of people fetched from the Star Wars API and shows details about their related planet in a modal popup.
 
-## Table of Contents
-
-- [Overview](#overview)
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Folder Structure](#folder-structure)
-- [Testing](#testing)
-- [Contributing](#contributing)
-- [License](#license)
-
 ## Overview
 
 This application is designed to allow users to view a grid-table of Star Wars characters along with their details (name, height, mass, created date, edited date, and a link to their planet). When a user clicks on the planet link, a modal popup appears with further details about the planet (name, diameter, climate, and population). Filtering by name is also supported.
