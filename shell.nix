@@ -8,28 +8,7 @@ pkgs.mkShell {
   buildInputs = with pkgs; [
     nodejs_18
     yarn
-    xorg.xhost
     cypress
-    firefox
-    chromium
-    xorg.libX11
-    xorg.libXcomposite
-    xorg.libXcursor
-    xorg.libXdamage
-    xorg.libXext
-    xorg.libXfixes
-    xorg.libXi
-    xorg.libXtst
-    xorg.libxcb
-    mesa
-    gtk3
-    glib
-    dbus
-    at-spi2-core
-    pango
-    cairo
-    fontconfig
-    patchelf
   ];
 
   shellHook = ''
@@ -37,6 +16,9 @@ pkgs.mkShell {
     export ELECTRON_OZONE_PLATFORM_HINT=x11
     export FIREFOX_DISABLE_SANDBOX=1
     export CYPRESS_INSTALL_BINARY=0
+    export CYPRESS_RUN_BINARY=${pkgs.cypress}/bin/Cypress
+
+
     echo "✅ Cypress shell is ready! Use 'yarn cypress open'"
   '';
 }
