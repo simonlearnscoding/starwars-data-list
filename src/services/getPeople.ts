@@ -8,7 +8,7 @@ It fetches multiple pages until it reaches the limit.
 
 export const getPeople = async (options: FetchPeopleOptions): Promise<FetchPeopleResult> => {
   const { limit = 10, next, search } = options;
-  const BASE_URL = 'https://swapi.dev/api/people/';
+  const BASE_URL = 'https://swapi.py4e.com/';
 
   // Determine the starting URL
   let url: string | null =
